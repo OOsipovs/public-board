@@ -21,9 +21,11 @@
     <div class="collapse navbar-collapse" id="navbarNav">
 
         <ul class="navbar-nav">
+            {% if user.is_authenticated %}
             <li class="nav-item active">
                 <a class="nav-link" href="{% url 'post-home'%}">Home </a>
             </li>
+            {% endif %}
 
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'post-about'%}">About</a>
@@ -31,19 +33,21 @@
         </ul>
 
         <ul class="navbar-nav ml-auto">
+            {% if user.is_authenticated %}
             <li class="nav-item m-1">
                 <a type="button" class="btn btn-outline-light" href="{% url 'post-about'%}">Account</a>
             </li>
             <li class="nav-item m-1">
-                <a type="button" class="btn btn-outline-light" href="#">Logout</a>
+                <a type="button" class="btn btn-outline-light" href="{%url 'logout' %}">Logout</a>
             </li>
-            <!--            <li class="nav-item m-1">-->
-            <!--                <a type="button" class="btn btn-outline-light" href="#">Register</a>-->
-            <!--            </li>-->
-            <!--            <li class="nav-item m-1">-->
-            <!--                <a type="button" class="btn btn-outline-light" href="#">Login</a>-->
-            <!--            </li>-->
-
+            {% else %}
+                        <li class="nav-item m-1">
+                            <a type="button" class="btn btn-outline-light" href="{% url 'users-register' %}">Register</a>
+                       </li>
+                        <li class="nav-item m-1">
+                            <a type="button" class="btn btn-outline-light" href="{% url 'login' %}">Login</a>
+                        </li>
+            {% endif %}
         </ul>
     </div>
 </nav>
