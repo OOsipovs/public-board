@@ -1,4 +1,5 @@
 {% extends "post/main.html" %}
+{% load crispy_forms_tags %}
 {% block content %}
 
 <div class="container">
@@ -16,9 +17,9 @@
                 <hr>
 
                 <div class="card-body">
-                    <h5 class="card-title">Eric Roby</h5>
-                    <p class="text-muted">@Codingwithroby</p>
-                    <p class="card-text">Enjoys: Programming, Hiking, Learning</p>
+                    <h5 class="card-title">{{user.first_name}} {{user.last_name}}</h5>
+                    <p class="text-muted">{{ user.username }}</p>
+                    <p class="card-text">Number of posts: {{ number_of_personal_posts }}</p>
                 </div>
                 <div class="card-footer d-flex justify-content-end">
                     <a href="{% url 'post-account' %}" class="card-link">Edit</a>
@@ -32,6 +33,7 @@
                 </button>
             </div>
 
+            {% for post_it in post_its%}
             <div class="card mb-4">
 
                 <div class="card-body">
@@ -47,234 +49,27 @@
                             <div class="col-10">
                                 <div class="row">
                                     <div class="col">
-                                        <h5 class="card-title">Special title treatment</h5>
+                                        <h5 class="card-title">{{post_it.post_title}}</h5>
                                     </div>
                                     <div class="col-4">
-                                        <p class="text-muted">2021-12-29</p>
+                                        <p class="text-muted">{{post_it.time_published}}</p>
                                     </div>
                                 </div>
 
                                 <p class="card-text">
-                                    With supporting text below as a natural lead-in to additional
-                                    content.
+                                    {{post_it.post_body}}
                                 </p>
                             </div>
                         </div>
                         <div class="d-flex justify-content-end">
-                            <p class="text-secondary">Posted by: Eric Roby</p>
+                            <p class="text-secondary">Posted by: {{ post_it.posted_by }}</p>
                         </div>
 
                     </div>
 
                 </div>
             </div>
-            <div class="card mb-4">
-
-                <div class="card-body">
-                    <div>
-                        <div class="row">
-                            <div class="col-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor"
-                                     class="bi bi-person"
-                                     viewBox="0 0 16 16">
-                                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-                                </svg>
-                            </div>
-                            <div class="col-10">
-                                <div class="row">
-                                    <div class="col">
-                                        <h5 class="card-title">Special title treatment</h5>
-                                    </div>
-                                    <div class="col-4">
-                                        <p class="text-muted">2021-12-29</p>
-                                    </div>
-                                </div>
-
-                                <p class="card-text">With supporting text below as a natural lead-in to additional
-                                    content. It was popularised in the 1960s with the release of Letraset sheets
-                                    containing Lorem Ipsum passages, and more recently with desktop publishing
-                                    software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-end">
-                            <p class="text-secondary">Posted by: Eric Roby</p>
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-            <div class="card mb-4">
-
-                <div class="card-body">
-                    <div>
-                        <div class="row">
-                            <div class="col-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor"
-                                     class="bi bi-person"
-                                     viewBox="0 0 16 16">
-                                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-                                </svg>
-                            </div>
-                            <div class="col-10">
-                                <div class="row">
-                                    <div class="col">
-                                        <h5 class="card-title">Special title treatment</h5>
-                                    </div>
-                                    <div class="col-4">
-                                        <p class="text-muted">2021-12-29</p>
-                                    </div>
-                                </div>
-
-                                <p class="card-text">With supporting text below as a natural lead-in to additional
-                                    content.</p>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-end">
-                            <p class="text-secondary">Posted by: Eric Roby</p>
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-            <div class="card mb-4">
-
-                <div class="card-body">
-                    <div>
-                        <div class="row">
-                            <div class="col-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor"
-                                     class="bi bi-person"
-                                     viewBox="0 0 16 16">
-                                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-                                </svg>
-                            </div>
-                            <div class="col-10">
-                                <div class="row">
-                                    <div class="col">
-                                        <h5 class="card-title">Special title treatment</h5>
-                                    </div>
-                                    <div class="col-4">
-                                        <p class="text-muted">2021-12-29</p>
-                                    </div>
-                                </div>
-
-                                <p class="card-text">With supporting text below as a natural lead-in to additional
-                                    content.</p>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-end">
-                            <p class="text-secondary">Posted by: Eric Roby</p>
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-            <div class="card mb-4">
-
-                <div class="card-body">
-                    <div>
-                        <div class="row">
-                            <div class="col-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor"
-                                     class="bi bi-person"
-                                     viewBox="0 0 16 16">
-                                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-                                </svg>
-                            </div>
-                            <div class="col-10">
-                                <div class="row">
-                                    <div class="col">
-                                        <h5 class="card-title">Special title treatment</h5>
-                                    </div>
-                                    <div class="col-4">
-                                        <p class="text-muted">2021-12-29</p>
-                                    </div>
-                                </div>
-
-                                <p class="card-text">With supporting text below as a natural lead-in to additional
-                                    content.</p>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-end">
-                            <p class="text-secondary">Posted by: Eric Roby</p>
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-            <div class="card mb-4">
-
-                <div class="card-body">
-                    <div>
-                        <div class="row">
-                            <div class="col-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor"
-                                     class="bi bi-person"
-                                     viewBox="0 0 16 16">
-                                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-                                </svg>
-                            </div>
-                            <div class="col-10">
-                                <div class="row">
-                                    <div class="col">
-                                        <h5 class="card-title">Special title treatment</h5>
-                                    </div>
-                                    <div class="col-4">
-                                        <p class="text-muted">2021-12-29</p>
-                                    </div>
-                                </div>
-
-                                <p class="card-text">With supporting text below as a natural lead-in to additional
-                                    content.</p>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-end">
-                            <p class="text-secondary">Posted by: Eric Roby</p>
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-            <div class="card mb-4">
-
-                <div class="card-body">
-                    <div>
-                        <div class="row">
-                            <div class="col-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor"
-                                     class="bi bi-person"
-                                     viewBox="0 0 16 16">
-                                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-                                </svg>
-                            </div>
-                            <div class="col-10">
-                                <div class="row">
-                                    <div class="col">
-                                        <h5 class="card-title">Special title treatment</h5>
-                                    </div>
-                                    <div class="col-4">
-                                        <p class="text-muted">2021-12-29</p>
-                                    </div>
-                                </div>
-
-                                <p class="card-text">With supporting text below as a natural lead-in to additional
-                                    content.</p>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-end">
-                            <p class="text-secondary">Posted by: Eric Roby</p>
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-
+            {% endfor %}
 
         </div>
 
@@ -294,23 +89,17 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>
-                    <div class="form-group">
-                        <label for="postItForm">Title</label>
-                        <input type="text" class="form-control" id="postItForm" placeholder="Django Coding...">
+                <form method="POST">
+                    <div class="modal-body">
+                        {% csrf_token %}
+
+                        {{ form|crispy }}
                     </div>
-
-
-                    <div class="form-group">
-                        <label for="postItBody">Post It Body</label>
-                        <textarea class="form-control" id="postItBody" rows="3"
-                                  placeholder="Say what you want to say..."></textarea>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Post now</button>
                     </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Post now</button>
             </div>
         </div>
     </div>
